@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "prettier",
+    "eslint-config-prettier"
+  ],
+  "env": {
+    "jest": true
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function"
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "react/require-default-props": "off",
+    "class-methods-use-this": "off"
+  }
+}
