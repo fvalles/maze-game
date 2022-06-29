@@ -92,7 +92,6 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     border: 0;
     vertical-align: baseline;
-    font: 100%;
   }
 
   /* HTML5 display-role reset for older browsers */

@@ -1,15 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import generator from 'generate-maze';
+import { Maze } from './screens/maze';
 
-const App: FunctionComponent = () => {
-  const maze = generator(4);
-  console.log(maze);
+/**
+ * App
+ */
 
-  return (
-    <div>
-      <h1>Maze Game</h1>
-    </div>
-  );
-};
+const App: FunctionComponent = () => <Maze />;
 
 export default App;
