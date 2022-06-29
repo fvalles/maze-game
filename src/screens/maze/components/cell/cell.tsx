@@ -1,18 +1,24 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { BORDER_WIDTH, getCellBoxShadow } from '../../helpers';
+import {
+  BORDER_WIDTH,
+  checkAvatarPresence,
+  getCellBoxShadow,
+} from '../../helpers';
+import marioAvatar from '../../../../assets/mario-bros.png';
+import { AvatarPosition, MazeType } from '../../types';
 
 /**
  * Types
  */
 
-interface CellProps {
-  bottom: boolean;
+interface CellProps
+  extends Pick<MazeType, 'bottom' | 'left' | 'right' | 'top'> {
+  avatarPosition: AvatarPosition;
   height: number;
-  left: boolean;
-  right: boolean;
-  top: boolean;
   width: number;
+  x: number;
+  y: number;
 }
 
 interface WrapperProps extends Pick<CellProps, 'height' | 'width'> {
@@ -43,11 +49,14 @@ const Wrapper = styled.div<WrapperProps>`
     topBorder,
     width,
   }) => `
+    align-items: center;
     border-bottom: ${bottomBorder ? BORDER_STYLE : '0'};
     border-left: ${leftBorder ? BORDER_STYLE : '0'};
     border-right: ${rightBorder ? BORDER_STYLE : '0'};
     border-top: ${topBorder ? BORDER_STYLE : '0'};
     box-shadow: ${boxShadow};
+    display: flex;
+    justify-content: center;
     height: ${height}px;
     width: ${width}px;
   `}
@@ -58,24 +67,35 @@ const Wrapper = styled.div<WrapperProps>`
  */
 
 export const Cell: FunctionComponent<CellProps> = ({
-  bottom,
-  height,
-  left,
-  right,
-  top,
-  width,
+  avatarPosition,
+  bottom: bottomWall,
+  height: cellHeight,
+  left: leftWall,
+  right: rightWall,
+  top: topWall,
+  width: cellWidth,
+  x: cellX,
+  y: cellY,
 }) => {
-  const boxShadow = getCellBoxShadow(bottom, left, right, top);
+  const boxShadow = getCellBoxShadow(bottomWall, leftWall, rightWall, topWall);
 
   return (
     <Wrapper
-      bottomBorder={bottom}
+      bottomBorder={bottomWall}
       boxShadow={boxShadow}
-      height={height}
-      leftBorder={left}
-      rightBorder={right}
-      topBorder={top}
-      width={width}
-    />
+      height={cellHeight}
+      leftBorder={leftWall}
+      rightBorder={rightWall}
+      topBorder={topWall}
+      width={cellWidth}>
+      {checkAvatarPresence(avatarPosition, cellX, cellY) && (
+        <img
+          alt="player avatar"
+          height={cellHeight * 0.9}
+          src={marioAvatar}
+          width={cellWidth * 0.9}
+        />
+      )}
+    </Wrapper>
   );
 };

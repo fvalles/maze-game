@@ -1,14 +1,37 @@
+import { AvatarPosition } from '../types';
+
 /**
  * Constants
  */
 
 export const BORDER_WIDTH = '3px';
 
+export const MAZE_SIZE = 12;
+
+export const MAZE_LAST_CELL = MAZE_SIZE - 1;
+
+export const MAZE_FIRST_CELL = 0;
+
 /**
  * Helpers
  */
 
-/** This helper gets the cell box shadow property that is used to fill the corners that are empty */
+/** This helper checks if the avatar should be rendered inside a Maze Cell */
+export const checkAvatarPresence = (
+  avatarPosition: AvatarPosition,
+  x: number,
+  y: number,
+): boolean => {
+  const { x: avatarX, y: avatarY } = avatarPosition;
+
+  if (avatarX === x && avatarY === y) {
+    return true;
+  }
+
+  return false;
+};
+
+/** This helper gets the cell box shadow property that is used to fill empty corners */
 export const getCellBoxShadow = (
   bottom: boolean,
   left: boolean,

@@ -1,27 +1,24 @@
-import React, { FunctionComponent } from 'react';
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import generator from 'generate-maze';
 import styled from 'styled-components';
-import { BORDER_WIDTH, getWindowDimension } from './helpers';
 import { Cell } from './components/cell';
+import { AvatarPosition, MazeType, MazeWithKey } from './types';
+import {
+  BORDER_WIDTH,
+  getWindowDimension,
+  MAZE_FIRST_CELL,
+  MAZE_LAST_CELL,
+  MAZE_SIZE,
+} from './helpers';
 
 /**
  * Types
  */
-
-interface MazeType {
-  x: number;
-  y: number;
-  top: boolean;
-  left: boolean;
-  bottom: boolean;
-  right: boolean;
-  set: number;
-}
-
-interface MazeWithKey {
-  key: number;
-  row: MazeType[];
-}
 
 interface WrapperProps {
   height: number;
@@ -34,8 +31,6 @@ interface WrapperProps {
 
 /** The maze box shadow is needed to paint the four external borders with a solid line */
 const MAZE_SHADOW = `${BORDER_WIDTH} ${BORDER_WIDTH}, -${BORDER_WIDTH} -${BORDER_WIDTH}, ${BORDER_WIDTH} -${BORDER_WIDTH}, -${BORDER_WIDTH} ${BORDER_WIDTH}`;
-
-const MAZE_SIZE = 12;
 
 /**
  * Styled Components
@@ -69,7 +64,12 @@ const ScreenWrapper = styled.main`
  */
 
 export const Maze: FunctionComponent = () => {
-  /** I decided to create a square maze, setting the same value to maze height and width */
+  const [avatarPosition, setAvatarPosition] = useState<AvatarPosition>({
+    x: 0,
+    y: 0,
+  });
+  /** Eller's Algorithm was used to generate the maze.
+   * I decided to create a square maze, setting the same value to maze height and width */
   const maze: MazeType[][] = generator(MAZE_SIZE);
   const mazeWithKey: MazeWithKey[] = maze.map((mazeRow, index) => ({
     row: mazeRow,
@@ -78,6 +78,52 @@ export const Maze: FunctionComponent = () => {
   const mazeDimension = getWindowDimension() * 0.8;
   const cellDimension = mazeDimension / MAZE_SIZE;
 
+  const shouldMoveAvatar = useCallback(
+    (e: KeyboardEvent): void => {
+      const { key: keyPressed } = e;
+      const { x, y } = avatarPosition;
+
+      if (keyPressed === 'ArrowDown') {
+        const { bottom: bottowmWall } = maze[y][x];
+
+        /** Check if wall present and if last cell is not reached */
+        if (!bottowmWall && y < MAZE_LAST_CELL) {
+          setAvatarPosition({ ...avatarPosition, y: y + 1 });
+        }
+      } else if (keyPressed === 'ArrowLeft') {
+        const { left: leftWall } = maze[y][x];
+
+        /** Check if wall present and if avatar is not in the first cell */
+        if (!leftWall && x > MAZE_FIRST_CELL) {
+          setAvatarPosition({ ...avatarPosition, x: x - 1 });
+        }
+      } else if (keyPressed === 'ArrowRight') {
+        const { right: rightWall } = maze[y][x];
+
+        /** Check if wall present and if last cell is not reached */
+        if (!rightWall && x < MAZE_LAST_CELL) {
+          setAvatarPosition({ ...avatarPosition, x: x + 1 });
+        }
+      } else if (keyPressed === 'ArrowUp') {
+        const { top: topWall } = maze[y][x];
+
+        /** Check if wall present and if avatar is not in the first cell */
+        if (!topWall && y > MAZE_FIRST_CELL) {
+          setAvatarPosition({ ...avatarPosition, y: y - 1 });
+        }
+      }
+    },
+    [avatarPosition],
+  );
+
+  useEffect(() => {
+    document.addEventListener('keydown', shouldMoveAvatar, true);
+
+    return () => {
+      document.removeEventListener('keydown', shouldMoveAvatar, true);
+    };
+  });
+
   return (
     <ScreenWrapper>
       <MazeWrapper height={mazeDimension} width={mazeDimension}>
@@ -85,6 +131,7 @@ export const Maze: FunctionComponent = () => {
           <MazeRow key={key}>
             {row.map(({ bottom, left, right, top, x, y }) => (
               <Cell
+                avatarPosition={avatarPosition}
                 bottom={bottom}
                 height={cellDimension}
                 key={`${x} ${y}`}
@@ -92,6 +139,8 @@ export const Maze: FunctionComponent = () => {
                 right={right}
                 top={top}
                 width={cellDimension}
+                x={x}
+                y={y}
               />
             ))}
           </MazeRow>
