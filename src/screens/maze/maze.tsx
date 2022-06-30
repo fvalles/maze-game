@@ -18,6 +18,7 @@ import {
   MAZE_ROW_LAST_CELL,
   MAZE_SIZE,
 } from './helpers';
+import { Modal } from '../../components/modal';
 
 /**
  * Types
@@ -31,6 +32,11 @@ interface WrapperProps {
 /**
  * Constants
  */
+
+const MARIO_ANIMATION_DURATION = 2000;
+
+export const MAZE_DIMENSION = getWindowDimension() * 0.8;
+export const CELL_DIMENSION = MAZE_DIMENSION / MAZE_SIZE;
 
 /** The maze box shadow is needed to paint the four external borders with a solid line */
 const MAZE_SHADOW = `${BORDER_WIDTH} ${BORDER_WIDTH}, -${BORDER_WIDTH} -${BORDER_WIDTH}, ${BORDER_WIDTH} -${BORDER_WIDTH}, -${BORDER_WIDTH} ${BORDER_WIDTH}`;
@@ -71,6 +77,7 @@ export const Maze: FunctionComponent = () => {
     x: 0,
     y: 0,
   });
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   /** Eller's Algorithm was used to generate the maze.
    * I decided to create a square maze, setting the same value to maze height and width */
   const maze: MazeType[][] = generator(MAZE_SIZE);
@@ -78,8 +85,6 @@ export const Maze: FunctionComponent = () => {
     row: mazeRow,
     key: index,
   }));
-  const mazeDimension = getWindowDimension() * 0.8;
-  const cellDimension = mazeDimension / MAZE_SIZE;
 
   const shouldMoveAvatar = useCallback(
     (e: KeyboardEvent): void => {
@@ -126,24 +131,36 @@ export const Maze: FunctionComponent = () => {
   useEffect(() => {
     if (isMazeExitCell(avatarPosition.x, avatarPosition.y)) {
       document.removeEventListener('keydown', shouldMoveAvatar, true);
+
+      setTimeout(() => {
+        setIsOpen(true);
+      }, MARIO_ANIMATION_DURATION);
     }
   }, [avatarPosition]);
 
   return (
     <ScreenWrapper>
-      <MazeWrapper height={mazeDimension} width={mazeDimension}>
+      <Modal
+        height={MAZE_DIMENSION * 1.1}
+        isOpen={modalIsOpen}
+        label="Game Over Modal"
+        testId="game-over-modal"
+        width={MAZE_DIMENSION * 1.1}>
+        <h1>Holi</h1>
+      </Modal>
+      <MazeWrapper height={MAZE_DIMENSION} width={MAZE_DIMENSION}>
         {mazeWithKey.map(({ key, row }) => (
           <MazeRow key={key}>
             {row.map(({ bottom, left, right, top, x, y }) => (
               <Cell
                 avatarPosition={avatarPosition}
                 bottom={bottom}
-                height={cellDimension}
+                height={CELL_DIMENSION}
                 key={`${x} ${y}`}
                 left={left}
                 right={right}
                 top={top}
-                width={cellDimension}
+                width={CELL_DIMENSION}
                 x={x}
                 y={y}
               />
