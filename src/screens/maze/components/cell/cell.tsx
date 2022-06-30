@@ -1,25 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import {
-  BORDER_WIDTH,
-  checkAvatarPresence,
-  getCellBoxShadow,
-} from '../../helpers';
-import marioAvatar from '../../../../assets/mario-bros.png';
-import { AvatarPosition, MazeType } from '../../types';
+import { BORDER_WIDTH, getCellBoxShadow } from '../../helpers';
+import { CellProps } from '../../types';
+import { CellImage } from './cell-image';
 
 /**
  * Types
  */
-
-interface CellProps
-  extends Pick<MazeType, 'bottom' | 'left' | 'right' | 'top'> {
-  avatarPosition: AvatarPosition;
-  height: number;
-  width: number;
-  x: number;
-  y: number;
-}
 
 interface WrapperProps extends Pick<CellProps, 'height' | 'width'> {
   bottomBorder: boolean;
@@ -69,13 +56,13 @@ const Wrapper = styled.div<WrapperProps>`
 export const Cell: FunctionComponent<CellProps> = ({
   avatarPosition,
   bottom: bottomWall,
-  height: cellHeight,
+  height,
   left: leftWall,
   right: rightWall,
   top: topWall,
-  width: cellWidth,
-  x: cellX,
-  y: cellY,
+  width,
+  x,
+  y,
 }) => {
   const boxShadow = getCellBoxShadow(bottomWall, leftWall, rightWall, topWall);
 
@@ -83,19 +70,18 @@ export const Cell: FunctionComponent<CellProps> = ({
     <Wrapper
       bottomBorder={bottomWall}
       boxShadow={boxShadow}
-      height={cellHeight}
+      height={height}
       leftBorder={leftWall}
       rightBorder={rightWall}
       topBorder={topWall}
-      width={cellWidth}>
-      {checkAvatarPresence(avatarPosition, cellX, cellY) && (
-        <img
-          alt="player avatar"
-          height={cellHeight * 0.9}
-          src={marioAvatar}
-          width={cellWidth * 0.9}
-        />
-      )}
+      width={width}>
+      <CellImage
+        avatarPosition={avatarPosition}
+        height={height}
+        width={width}
+        x={x}
+        y={y}
+      />
     </Wrapper>
   );
 };

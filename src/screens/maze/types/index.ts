@@ -14,3 +14,12 @@ export interface MazeWithKey {
 }
 
 export interface AvatarPosition extends Pick<MazeType, 'x' | 'y'> {}
+
+export interface CellProps
+  extends Pick<MazeType, 'bottom' | 'left' | 'right' | 'top'> {
+  avatarPosition: AvatarPosition;
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+}

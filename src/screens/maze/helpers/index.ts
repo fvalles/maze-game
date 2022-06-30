@@ -75,3 +75,7 @@ export const getWindowDimension = (): number => {
 
   return innerHeight;
 };
+
+/** This helper checks if the current cell is the maze end cell (bottom right cell) */
+export const isMazeEndCell = (x: number, y: number): boolean =>
+  MAZE_LAST_CELL === x && MAZE_LAST_CELL === y;
