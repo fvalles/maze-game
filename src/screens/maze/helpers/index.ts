@@ -5,12 +5,11 @@ import { AvatarPosition } from '../types';
  */
 
 export const BORDER_WIDTH = '3px';
-
 export const MAZE_SIZE = 12;
-
-export const MAZE_LAST_CELL = MAZE_SIZE - 1;
-
-export const MAZE_FIRST_CELL = 0;
+export const MAZE_COLUMN_LAST_CELL = MAZE_SIZE - 1;
+export const MAZE_ROW_LAST_CELL = MAZE_SIZE - 1;
+export const MAZE_COLUMN_FIRST_CELL = 0;
+export const MAZE_ROW_FIRST_CELL = 0;
 
 /**
  * Helpers
@@ -77,5 +76,5 @@ export const getWindowDimension = (): number => {
 };
 
 /** This helper checks if the current cell is the maze end cell (bottom right cell) */
-export const isMazeEndCell = (x: number, y: number): boolean =>
-  MAZE_LAST_CELL === x && MAZE_LAST_CELL === y;
+export const isMazeExitCell = (x: number, y: number): boolean =>
+  MAZE_ROW_LAST_CELL === x && MAZE_COLUMN_LAST_CELL === y;

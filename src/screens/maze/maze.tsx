@@ -11,8 +11,11 @@ import { AvatarPosition, MazeType, MazeWithKey } from './types';
 import {
   BORDER_WIDTH,
   getWindowDimension,
-  MAZE_FIRST_CELL,
-  MAZE_LAST_CELL,
+  isMazeExitCell,
+  MAZE_COLUMN_FIRST_CELL,
+  MAZE_COLUMN_LAST_CELL,
+  MAZE_ROW_FIRST_CELL,
+  MAZE_ROW_LAST_CELL,
   MAZE_SIZE,
 } from './helpers';
 
@@ -86,29 +89,25 @@ export const Maze: FunctionComponent = () => {
       if (keyPressed === 'ArrowDown') {
         const { bottom: bottowmWall } = maze[y][x];
 
-        /** Check if wall present and if last cell is not reached */
-        if (!bottowmWall && y < MAZE_LAST_CELL) {
+        if (!bottowmWall && y < MAZE_COLUMN_LAST_CELL) {
           setAvatarPosition({ ...avatarPosition, y: y + 1 });
         }
       } else if (keyPressed === 'ArrowLeft') {
         const { left: leftWall } = maze[y][x];
 
-        /** Check if wall present and if avatar is not in the first cell */
-        if (!leftWall && x > MAZE_FIRST_CELL) {
+        if (!leftWall && x > MAZE_ROW_FIRST_CELL) {
           setAvatarPosition({ ...avatarPosition, x: x - 1 });
         }
       } else if (keyPressed === 'ArrowRight') {
         const { right: rightWall } = maze[y][x];
 
-        /** Check if wall present and if last cell is not reached */
-        if (!rightWall && x < MAZE_LAST_CELL) {
+        if (!rightWall && x < MAZE_ROW_LAST_CELL) {
           setAvatarPosition({ ...avatarPosition, x: x + 1 });
         }
       } else if (keyPressed === 'ArrowUp') {
         const { top: topWall } = maze[y][x];
 
-        /** Check if wall present and if avatar is not in the first cell */
-        if (!topWall && y > MAZE_FIRST_CELL) {
+        if (!topWall && y > MAZE_COLUMN_FIRST_CELL) {
           setAvatarPosition({ ...avatarPosition, y: y - 1 });
         }
       }
@@ -123,6 +122,12 @@ export const Maze: FunctionComponent = () => {
       document.removeEventListener('keydown', shouldMoveAvatar, true);
     };
   });
+
+  useEffect(() => {
+    if (isMazeExitCell(avatarPosition.x, avatarPosition.y)) {
+      document.removeEventListener('keydown', shouldMoveAvatar, true);
+    }
+  }, [avatarPosition]);
 
   return (
     <ScreenWrapper>

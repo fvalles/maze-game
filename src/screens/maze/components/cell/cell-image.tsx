@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { checkAvatarPresence, isMazeEndCell } from '../../helpers';
+import { checkAvatarPresence, isMazeExitCell } from '../../helpers';
 import marioAvatar from '../../../../assets/mario-bros.png';
 import piping from '../../../../assets/piping.png';
 import marioEnteringPiping from '../../../../assets/mario-entering-piping.gif';
@@ -31,7 +31,7 @@ export const CellImage: FunctionComponent<CellImageProps> = ({
   x,
   y,
 }) => {
-  if (isMazeEndCell(x, y) && !checkAvatarPresence(avatarPosition, x, y)) {
+  if (isMazeExitCell(x, y) && !checkAvatarPresence(avatarPosition, x, y)) {
     return (
       <img
         alt="green piping"
@@ -42,7 +42,7 @@ export const CellImage: FunctionComponent<CellImageProps> = ({
     );
   }
 
-  if (isMazeEndCell(x, y)) {
+  if (isMazeExitCell(x, y)) {
     return (
       <img
         alt="mario entering piping"
