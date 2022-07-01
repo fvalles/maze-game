@@ -1,9 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { CellProps } from '@screens/maze/types';
 import { checkAvatarPresence, isMazeExitCell } from '@screens/maze/helpers';
-import marioAvatar from '../../../../assets/mario-bros.png';
-import piping from '../../../../assets/piping.png';
-import marioEnteringPiping from '../../../../assets/mario-entering-piping.gif';
+import marioAvatarPng from '../../../../assets/mario-bros.png';
+import marioAvatarWebp from '../../../../assets/mario-bros.webp';
+import marioEnteringPipingGif from '../../../../assets/mario-entering-piping.gif';
+import marioEnteringPipingWebp from '../../../../assets/mario-entering-piping.webp';
+import pipingPng from '../../../../assets/piping.png';
+import pipingWebp from '../../../../assets/piping.webp';
 
 /**
  * Types
@@ -33,34 +36,45 @@ export const CellImage: FunctionComponent<CellImageProps> = ({
 }) => {
   if (isMazeExitCell(x, y) && !checkAvatarPresence(avatarPosition, x, y)) {
     return (
-      <img
-        alt="green piping"
-        height={height * GREEN_PIPING_SCALE}
-        src={piping}
-        width={width * GREEN_PIPING_SCALE}
-      />
+      /** I wrap this and the following img components with <picture> html tag to show WebP images if browser supports them.
+       * This is better for SEO/SEM and to use lighter image files */
+      <picture>
+        <source srcSet={pipingWebp} type="image/webp" />
+        <img
+          alt="green piping"
+          height={height * GREEN_PIPING_SCALE}
+          src={pipingPng}
+          width={width * GREEN_PIPING_SCALE}
+        />
+      </picture>
     );
   }
 
   if (isMazeExitCell(x, y)) {
     return (
-      <img
-        alt="mario entering piping"
-        height={height * MARIO_ENTERING_PIPING_SCALE}
-        src={marioEnteringPiping}
-        width={width * MARIO_ENTERING_PIPING_SCALE}
-      />
+      <picture>
+        <source srcSet={marioEnteringPipingWebp} type="image/webp" />
+        <img
+          alt="mario entering piping"
+          height={height * MARIO_ENTERING_PIPING_SCALE}
+          src={marioEnteringPipingGif}
+          width={width * MARIO_ENTERING_PIPING_SCALE}
+        />
+      </picture>
     );
   }
 
   if (checkAvatarPresence(avatarPosition, x, y)) {
     return (
-      <img
-        alt="mario avatar"
-        height={height * MARIO_AVATAR_SCALE}
-        src={marioAvatar}
-        width={width * MARIO_AVATAR_SCALE}
-      />
+      <picture>
+        <source srcSet={marioAvatarWebp} type="image/webp" />
+        <img
+          alt="mario avatar"
+          height={height * MARIO_AVATAR_SCALE}
+          src={marioAvatarPng}
+          width={width * MARIO_AVATAR_SCALE}
+        />
+      </picture>
     );
   }
 
