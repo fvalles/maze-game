@@ -39,7 +39,7 @@ interface WrapperProps {
  * Constants
  */
 
-const MARIO_ANIMATION_DURATION = 2000;
+const MARIO_ANIMATION_DURATION = 1800;
 
 export const MAZE_DIMENSION = getWindowDimension() * 0.8;
 export const CELL_DIMENSION = MAZE_DIMENSION / MAZE_SIZE;
