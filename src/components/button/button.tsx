@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { KeyColors } from '../../core/theme/colors';
-import { ButtonText } from '../typography/button-text';
+import { KeyColors } from '@core/theme/colors';
+import { ButtonText } from '@components/typography';
 
 /**
  * Types

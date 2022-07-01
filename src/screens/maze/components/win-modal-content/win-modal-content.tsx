@@ -1,11 +1,9 @@
 import React, { FunctionComponent, useCallback } from 'react';
+import { Button } from '@components/button';
+import { Spacer } from '@components/spacer';
+import { Body, H1, H2 } from '@components/typography';
+import { AvatarPosition } from '@screens/maze/types';
 import styled from 'styled-components';
-import { Button } from '../../../../components/button';
-import { Spacer } from '../../../../components/spacer';
-import { Body } from '../../../../components/typography/body';
-import { H1 } from '../../../../components/typography/h1';
-import { H2 } from '../../../../components/typography/h2';
-import { AvatarPosition } from '../../types';
 
 /**
  * Types

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Maze } from './screens/maze';
+import { Maze } from '@screens/maze';
 
 /**
  * App

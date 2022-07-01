@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import generator from 'generate-maze';
 import styled from 'styled-components';
+import { Modal } from '@components/modal';
 import { Cell } from './components/cell';
 import { AvatarPosition, MazeType, MazeWithKey } from './types';
 import {
@@ -18,7 +19,6 @@ import {
   MAZE_ROW_LAST_CELL,
   MAZE_SIZE,
 } from './helpers';
-import { Modal } from '../../components/modal';
 import { WinModalContent } from './components/win-modal-content';
 
 /**

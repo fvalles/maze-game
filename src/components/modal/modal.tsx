@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
+import { Colors } from '@core/theme/colors';
 import ModalWrapper from 'react-modal';
-import { Colors } from '../../core/theme/colors';
 
 /**
  * Types

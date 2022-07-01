@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
+import { BORDER_WIDTH, getCellBoxShadow } from '@screens/maze/helpers';
+import { CellProps } from '@screens/maze/types';
 import styled from 'styled-components';
-import { BORDER_WIDTH, getCellBoxShadow } from '../../helpers';
-import { CellProps } from '../../types';
 import { CellImage } from './cell-image';
 
 /**

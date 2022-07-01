@@ -1,4 +1,4 @@
-import { KeyColors } from '../../../core/theme/colors';
+import { KeyColors } from '@core/theme/colors';
 
 /**
  * Types

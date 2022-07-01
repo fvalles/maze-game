@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { GlobalStyle } from '@core/theme';
+import { ThemeProvider } from '@core/theme/theme-provider';
 import App from './App';
-import { GlobalStyle } from './core/theme';
-import { ThemeProvider } from './core/theme/theme-provider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

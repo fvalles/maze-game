@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { checkAvatarPresence, isMazeExitCell } from '../../helpers';
+import { CellProps } from '@screens/maze/types';
+import { checkAvatarPresence, isMazeExitCell } from '@screens/maze/helpers';
 import marioAvatar from '../../../../assets/mario-bros.png';
 import piping from '../../../../assets/piping.png';
 import marioEnteringPiping from '../../../../assets/mario-entering-piping.gif';
-import { CellProps } from '../../types';
 
 /**
  * Types
