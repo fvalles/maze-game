@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { Button } from '@components/button';
 import { Spacer } from '@components/spacer';
 import { Body, H1, H2 } from '@components/typography';
 import { AvatarPosition } from '@screens/maze/types';
-import styled from 'styled-components';
 
 /**
  * Types
@@ -42,6 +43,8 @@ export const WinModalContent: FunctionComponent<WinModalContentProps> = ({
   setAvatarPosition,
   setModalIsOpen,
 }) => {
+  const navigate = useNavigate();
+
   const restartGame = useCallback(() => {
     setAvatarMoves(0);
     setAvatarPosition({ x: 0, y: 0 });
@@ -68,6 +71,7 @@ export const WinModalContent: FunctionComponent<WinModalContentProps> = ({
         <Button
           onClick={() => {
             restartGame();
+            navigate('/');
           }}
           testId="main-menu-button"
           title="MAIN MENU"

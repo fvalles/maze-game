@@ -25,6 +25,11 @@ import { WinModalContent } from './components/win-modal-content';
  * Types
  */
 
+interface MazeProps {
+  bestScore: number;
+  setBestScore: (score: number) => void;
+}
+
 interface WrapperProps {
   height: number;
   width: number;
@@ -73,7 +78,10 @@ const ScreenWrapper = styled.main`
  * Maze
  */
 
-export const Maze: FunctionComponent = () => {
+export const Maze: FunctionComponent<MazeProps> = ({
+  bestScore,
+  setBestScore,
+}) => {
   const [avatarPosition, setAvatarPosition] = useState<AvatarPosition>({
     x: 0,
     y: 0,
@@ -131,6 +139,10 @@ export const Maze: FunctionComponent = () => {
 
     if (isMazeExitCell(avatarPosition.x, avatarPosition.y)) {
       document.removeEventListener('keydown', shouldMoveAvatar, true);
+
+      if (bestScore === 0 || avatarMoves < bestScore) {
+        setBestScore(avatarMoves);
+      }
 
       setTimeout(() => {
         setModalIsOpen(true);
