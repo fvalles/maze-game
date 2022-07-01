@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 import ModalWrapper from 'react-modal';
+import { Colors } from '../../core/theme/colors';
 
 /**
  * Types
@@ -35,6 +36,8 @@ export const Modal: FunctionComponent<ModalProps> = ({
   const modalStyles = {
     content: {
       alignItems: 'center',
+      backgroundColor: Colors.modalBackground,
+      boxShadow: '2px 2px 5px, -2px 2px 5px, 2px -2px 5px, -2px -2px 5px',
       borderRadius: 4,
       display: 'flex',
       height: `${height}px`,

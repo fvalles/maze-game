@@ -19,6 +19,7 @@ import {
   MAZE_SIZE,
 } from './helpers';
 import { Modal } from '../../components/modal';
+import { WinModalContent } from './components/win-modal-content';
 
 /**
  * Types
@@ -77,7 +78,8 @@ export const Maze: FunctionComponent = () => {
     x: 0,
     y: 0,
   });
-  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [avatarMoves, setAvatarMoves] = useState<number>(0);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   /** Eller's Algorithm was used to generate the maze.
    * I decided to create a square maze, setting the same value to maze height and width */
   const maze: MazeType[][] = generator(MAZE_SIZE);
@@ -95,24 +97,28 @@ export const Maze: FunctionComponent = () => {
         const { bottom: bottowmWall } = maze[y][x];
 
         if (!bottowmWall && y < MAZE_COLUMN_LAST_CELL) {
+          setAvatarMoves(avatarMoves + 1);
           setAvatarPosition({ ...avatarPosition, y: y + 1 });
         }
       } else if (keyPressed === 'ArrowLeft') {
         const { left: leftWall } = maze[y][x];
 
         if (!leftWall && x > MAZE_ROW_FIRST_CELL) {
+          setAvatarMoves(avatarMoves + 1);
           setAvatarPosition({ ...avatarPosition, x: x - 1 });
         }
       } else if (keyPressed === 'ArrowRight') {
         const { right: rightWall } = maze[y][x];
 
         if (!rightWall && x < MAZE_ROW_LAST_CELL) {
+          setAvatarMoves(avatarMoves + 1);
           setAvatarPosition({ ...avatarPosition, x: x + 1 });
         }
       } else if (keyPressed === 'ArrowUp') {
         const { top: topWall } = maze[y][x];
 
         if (!topWall && y > MAZE_COLUMN_FIRST_CELL) {
+          setAvatarMoves(avatarMoves + 1);
           setAvatarPosition({ ...avatarPosition, y: y - 1 });
         }
       }
@@ -123,30 +129,33 @@ export const Maze: FunctionComponent = () => {
   useEffect(() => {
     document.addEventListener('keydown', shouldMoveAvatar, true);
 
-    return () => {
-      document.removeEventListener('keydown', shouldMoveAvatar, true);
-    };
-  });
-
-  useEffect(() => {
     if (isMazeExitCell(avatarPosition.x, avatarPosition.y)) {
       document.removeEventListener('keydown', shouldMoveAvatar, true);
 
       setTimeout(() => {
-        setIsOpen(true);
+        setModalIsOpen(true);
       }, MARIO_ANIMATION_DURATION);
     }
+
+    return () => {
+      document.removeEventListener('keydown', shouldMoveAvatar, true);
+    };
   }, [avatarPosition]);
 
   return (
     <ScreenWrapper>
       <Modal
-        height={MAZE_DIMENSION * 1.1}
+        height={MAZE_DIMENSION}
         isOpen={modalIsOpen}
         label="Game Over Modal"
         testId="game-over-modal"
-        width={MAZE_DIMENSION * 1.1}>
-        <h1>Holi</h1>
+        width={MAZE_DIMENSION}>
+        <WinModalContent
+          avatarMoves={avatarMoves}
+          setAvatarMoves={setAvatarMoves}
+          setAvatarPosition={setAvatarPosition}
+          setModalIsOpen={setModalIsOpen}
+        />
       </Modal>
       <MazeWrapper height={MAZE_DIMENSION} width={MAZE_DIMENSION}>
         {mazeWithKey.map(({ key, row }) => (
