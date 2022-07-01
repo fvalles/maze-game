@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Button } from '@components/button';
 import { Spacer } from '@components/spacer';
 import { H1, H3 } from '@components/typography';
+import { MazeProps } from '@screens/maze/types';
 import marioRunningGif from '../../assets/mario-running.gif';
 import marioRunningWebp from '../../assets/mario-running.webp';
 
@@ -11,9 +12,7 @@ import marioRunningWebp from '../../assets/mario-running.webp';
  * Types
  */
 
-interface MainProps {
-  bestScore: number;
-}
+interface MainProps extends Pick<MazeProps, 'bestScore'> {}
 
 /**
  * Styled Components
@@ -37,18 +36,18 @@ export const Main: FunctionComponent<MainProps> = ({ bestScore }) => {
   return (
     <Wrapper>
       <H1>Maze Game</H1>
-      {bestScore ? (
+      {!!bestScore && (
         <>
           <Spacer size={50} />
           <H3>Best score: {bestScore} moves</H3>
         </>
-      ) : null}
+      )}
       <Spacer size={100} />
       <Button
         onClick={() => {
           navigate('maze');
         }}
-        testId="start-game-button"
+        testId="main-start-game-button"
         title="START GAME"
       />
       <Spacer size={50} />

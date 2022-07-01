@@ -9,10 +9,15 @@ import { CellImage } from './cell-image';
  */
 
 interface WrapperProps extends Pick<CellProps, 'height' | 'width'> {
+  /** If true, bottom border will be drawn */
   bottomBorder: boolean;
+  /** Cell box shadow property used to fill empty corners */
   boxShadow: string;
+  /** If true, left border will be drawn */
   leftBorder: boolean;
+  /** If true, right border will be drawn */
   rightBorder: boolean;
+  /** If true, top border will be drawn */
   topBorder: boolean;
 }
 

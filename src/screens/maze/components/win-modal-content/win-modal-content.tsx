@@ -65,7 +65,7 @@ export const WinModalContent: FunctionComponent<WinModalContentProps> = ({
           onClick={() => {
             restartGame();
           }}
-          testId="restart-button"
+          testId="win-modal-restart-button"
           title="RESTART"
         />
         <Button
@@ -73,7 +73,7 @@ export const WinModalContent: FunctionComponent<WinModalContentProps> = ({
             restartGame();
             navigate('/');
           }}
-          testId="main-menu-button"
+          testId="win-modal-main-menu-button"
           title="MAIN MENU"
         />
       </ButtonsWrapper>

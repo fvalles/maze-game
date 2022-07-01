@@ -8,7 +8,7 @@ import generator from 'generate-maze';
 import styled from 'styled-components';
 import { Modal } from '@components/modal';
 import { Cell } from './components/cell';
-import { AvatarPosition, MazeType, MazeWithKey } from './types';
+import { AvatarPosition, MazeProps, MazeType, MazeWithKey } from './types';
 import {
   BORDER_WIDTH,
   getWindowDimension,
@@ -25,13 +25,10 @@ import { WinModalContent } from './components/win-modal-content';
  * Types
  */
 
-interface MazeProps {
-  bestScore: number;
-  setBestScore: (score: number) => void;
-}
-
 interface WrapperProps {
+  /** Maze height */
   height: number;
+  /** Maze width */
   width: number;
 }
 
@@ -40,10 +37,8 @@ interface WrapperProps {
  */
 
 const MARIO_ANIMATION_DURATION = 1800;
-
 export const MAZE_DIMENSION = getWindowDimension() * 0.8;
 export const CELL_DIMENSION = MAZE_DIMENSION / MAZE_SIZE;
-
 /** The maze box shadow is needed to paint the four external borders with a solid line */
 const MAZE_SHADOW = `${BORDER_WIDTH} ${BORDER_WIDTH}, -${BORDER_WIDTH} -${BORDER_WIDTH}, ${BORDER_WIDTH} -${BORDER_WIDTH}, -${BORDER_WIDTH} ${BORDER_WIDTH}`;
 
@@ -160,7 +155,7 @@ export const Maze: FunctionComponent<MazeProps> = ({
         height={MAZE_DIMENSION}
         isOpen={modalIsOpen}
         label="Game Over Modal"
-        testId="game-over-modal"
+        testId="maze-game-over-modal"
         width={MAZE_DIMENSION}>
         <WinModalContent
           avatarMoves={avatarMoves}
