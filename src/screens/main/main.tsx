@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { Button } from '@components/button';
 import { Spacer } from '@components/spacer';
 import { H1, H3 } from '@components/typography';
 import { MazeProps } from '@screens/maze/types';
+import { Div } from '@components/div';
 import marioRunningGif from '../../assets/mario-running.gif';
 import marioRunningWebp from '../../assets/mario-running.webp';
 
@@ -15,18 +15,6 @@ import marioRunningWebp from '../../assets/mario-running.webp';
 interface MainProps extends Pick<MazeProps, 'bestScore'> {}
 
 /**
- * Styled Components
- */
-
-const Wrapper = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-`;
-
-/**
  * Main
  */
 
@@ -34,7 +22,12 @@ export const Main: FunctionComponent<MainProps> = ({ bestScore }) => {
   const navigate = useNavigate();
 
   return (
-    <Wrapper>
+    <Div
+      alignItems="center"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      height="100vh">
       <H1>Maze Game</H1>
       {!!bestScore && (
         <>
@@ -62,6 +55,6 @@ export const Main: FunctionComponent<MainProps> = ({ bestScore }) => {
           width={132}
         />
       </picture>
-    </Wrapper>
+    </Div>
   );
 };

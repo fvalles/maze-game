@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { Button } from '@components/button';
+import { Div } from '@components/div';
 import { Spacer } from '@components/spacer';
 import { Body, H1, H2 } from '@components/typography';
 import { AvatarPosition } from '@screens/maze/types';
@@ -16,22 +16,6 @@ interface WinModalContentProps {
   setAvatarPosition: (position: AvatarPosition) => void;
   setModalIsOpen: (visible: boolean) => void;
 }
-
-/**
- * Styled Components
- */
-
-const ButtonsWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-`;
-
-const Wrapper = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`;
 
 /**
  * WinModalContent
@@ -52,14 +36,14 @@ export const WinModalContent: FunctionComponent<WinModalContentProps> = ({
   }, []);
 
   return (
-    <Wrapper>
+    <Div alignItems="center" display="flex" flexDirection="column">
       <H1>Congratulations</H1>
       <Spacer />
       <H2>You won!</H2>
       <Spacer />
       <Body>Total number of moves: {avatarMoves}</Body>
-      <Spacer size={100} />
-      <ButtonsWrapper>
+      <Spacer size={80} />
+      <Div display="flex" justifyContent="space-around" padding="0px 80px">
         <Button
           background="restartButtonBackground"
           onClick={() => {
@@ -76,7 +60,7 @@ export const WinModalContent: FunctionComponent<WinModalContentProps> = ({
           testId="win-modal-main-menu-button"
           title="MAIN MENU"
         />
-      </ButtonsWrapper>
-    </Wrapper>
+      </Div>
+    </Div>
   );
 };

@@ -5,8 +5,8 @@ import React, {
   useState,
 } from 'react';
 import generator from 'generate-maze';
-import styled from 'styled-components';
 import { Modal } from '@components/modal';
+import { Div } from '@components/div';
 import { Cell } from './components/cell';
 import { AvatarPosition, MazeProps, MazeType, MazeWithKey } from './types';
 import {
@@ -22,17 +22,6 @@ import {
 import { WinModalContent } from './components/win-modal-content';
 
 /**
- * Types
- */
-
-interface WrapperProps {
-  /** Maze height */
-  height: number;
-  /** Maze width */
-  width: number;
-}
-
-/**
  * Constants
  */
 
@@ -41,33 +30,6 @@ export const MAZE_DIMENSION = getWindowDimension() * 0.8;
 export const CELL_DIMENSION = MAZE_DIMENSION / MAZE_SIZE;
 /** The maze box shadow is needed to paint the four external borders with a solid line */
 const MAZE_SHADOW = `${BORDER_WIDTH} ${BORDER_WIDTH}, -${BORDER_WIDTH} -${BORDER_WIDTH}, ${BORDER_WIDTH} -${BORDER_WIDTH}, -${BORDER_WIDTH} ${BORDER_WIDTH}`;
-
-/**
- * Styled Components
- */
-
-const MazeWrapper = styled.div<WrapperProps>`
-  box-shadow: ${MAZE_SHADOW};
-  flex-direction: column;
-  justify-content: center;
-  display: flex;
-  ${({ height, width }) => `
-    height: ${height}px;
-    width: ${width}px;
-  `}
-`;
-
-const MazeRow = styled.div`
-  display: flex;
-`;
-
-const ScreenWrapper = styled.main`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-`;
 
 /**
  * Maze
@@ -150,7 +112,12 @@ export const Maze: FunctionComponent<MazeProps> = ({
   }, [avatarPosition]);
 
   return (
-    <ScreenWrapper>
+    <Div
+      alignItems="center"
+      display="flex"
+      justifyContent="center"
+      height="100vh"
+      width="100vw">
       <Modal
         height={MAZE_DIMENSION}
         isOpen={modalIsOpen}
@@ -164,9 +131,15 @@ export const Maze: FunctionComponent<MazeProps> = ({
           setModalIsOpen={setModalIsOpen}
         />
       </Modal>
-      <MazeWrapper height={MAZE_DIMENSION} width={MAZE_DIMENSION}>
+      <Div
+        boxShadow={MAZE_SHADOW}
+        display="flex"
+        flexDirection="column"
+        height={`${MAZE_DIMENSION}px`}
+        justifyContent="center"
+        width={`${MAZE_DIMENSION}px`}>
         {mazeWithKey.map(({ key, row }) => (
-          <MazeRow key={key}>
+          <Div display="flex" key={key}>
             {row.map(({ bottom, left, right, top, x, y }) => (
               <Cell
                 avatarPosition={avatarPosition}
@@ -181,9 +154,9 @@ export const Maze: FunctionComponent<MazeProps> = ({
                 y={y}
               />
             ))}
-          </MazeRow>
+          </Div>
         ))}
-      </MazeWrapper>
-    </ScreenWrapper>
+      </Div>
+    </Div>
   );
 };
