@@ -18,6 +18,7 @@ import {
   MAZE_ROW_FIRST_CELL,
   MAZE_ROW_LAST_CELL,
   MAZE_SIZE,
+  fetchUserScore,
 } from './helpers';
 import { WinModalContent } from './components/win-modal-content';
 
@@ -98,6 +99,7 @@ export const Maze: FunctionComponent<MazeProps> = ({
       document.removeEventListener('keydown', shouldMoveAvatar, true);
 
       if (bestScore === 0 || avatarMoves < bestScore) {
+        fetchUserScore(avatarMoves);
         setBestScore(avatarMoves);
       }
 

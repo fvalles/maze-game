@@ -44,3 +44,7 @@ export interface MazeWithKey {
   /** Maze row */
   row: MazeType[];
 }
+
+export interface UserScoreResponse {
+  message: string;
+}
