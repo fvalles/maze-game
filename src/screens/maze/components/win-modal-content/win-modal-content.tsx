@@ -4,18 +4,17 @@ import { Button } from '@components/button';
 import { Div } from '@components/div';
 import { Spacer } from '@components/spacer';
 import { Body, H1, H2 } from '@components/typography';
-import { AvatarPosition } from '@screens/maze/types';
+import { MazeHookResponse } from '@screens/maze/hooks/use-maze';
 
 /**
  * Types
  */
 
-interface WinModalContentProps {
-  avatarMoves: number;
-  setAvatarMoves: (moves: number) => void;
-  setAvatarPosition: (position: AvatarPosition) => void;
-  setModalIsOpen: (visible: boolean) => void;
-}
+interface WinModalContentProps
+  extends Pick<
+    MazeHookResponse,
+    'avatarMoves' | 'setAvatarMoves' | 'setAvatarPosition' | 'setModalIsOpen'
+  > {}
 
 /**
  * WinModalContent
