@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`spacer component should render with custom height of 64px 1`] = `
+.c0 {
+  height: 64px;
+}
+
+<div
+  className="c0"
+  size={64}
+/>
+`;
+
+exports[`spacer component should render with default height 1`] = `
+.c0 {
+  height: 32px;
+}
+
+<div
+  className="c0"
+/>
+`;

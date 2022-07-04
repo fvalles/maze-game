@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`button component should render with title, onClick function and custom background and text 1`] = `
+.c1 {
+  color: #212240;
+  font-family: Avenir Regular,'Avenir Next','Segoe UI', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 16px;
+}
+
+.c0 {
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  width: 200px;
+}
+
+<button
+  className="c0"
+  data-testid="some-test-id"
+  onClick={[MockFunction]}
+>
+  <span
+    className="c1"
+    color="text"
+  >
+    Some Title
+  </span>
+</button>
+`;
+
+exports[`button component should render with title, onClick function and default background and text colors 1`] = `
+.c1 {
+  color: #FFFFFF;
+  font-family: Avenir Regular,'Avenir Next','Segoe UI', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 16px;
+}
+
+.c0 {
+  background-color: #B20600;
+  border-radius: 4px;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  width: 200px;
+}
+
+<button
+  className="c0"
+  data-testid="some-test-id"
+  onClick={[MockFunction]}
+>
+  <span
+    className="c1"
+  >
+    Some Title
+  </span>
+</button>
+`;

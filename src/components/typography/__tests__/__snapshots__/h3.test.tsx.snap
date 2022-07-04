@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`h3 component should render with custom white color 1`] = `
+.c0 {
+  color: #FFFFFF;
+  font-family: Avenir Light,'Avenir Next','Segoe UI', sans-serif;
+  font-size: 25px;
+  line-height: 29px;
+}
+
+<h3
+  className="c0"
+  color="white"
+>
+  Lorem ipsum
+</h3>
+`;
+
+exports[`h3 component should render with default css properties 1`] = `
+.c0 {
+  color: #7F8487;
+  font-family: Avenir Light,'Avenir Next','Segoe UI', sans-serif;
+  font-size: 25px;
+  line-height: 29px;
+}
+
+<h3
+  className="c0"
+>
+  Lorem ipsum
+</h3>
+`;
