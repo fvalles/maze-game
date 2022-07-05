@@ -25,7 +25,7 @@ interface WrapperProps extends Pick<CellProps, 'height' | 'width'> {
  * Constants
  */
 
-const BORDER_STYLE = `${BORDER_WIDTH} solid black`;
+export const BORDER_STYLE = `${BORDER_WIDTH} solid black`;
 
 /**
  * Styled Components
@@ -48,8 +48,8 @@ const Wrapper = styled.div<WrapperProps>`
     border-top: ${topBorder ? BORDER_STYLE : '0'};
     box-shadow: ${boxShadow};
     display: flex;
-    justify-content: center;
     height: ${height}px;
+    justify-content: center;
     width: ${width}px;
   `}
 `;
