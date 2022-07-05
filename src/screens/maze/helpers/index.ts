@@ -4,6 +4,8 @@ import { AvatarPosition, UserScoreResponse } from '../types';
  * Constants
  */
 
+export const API_ENDPOINT =
+  'https://run.mocky.io/v3/7bd95e5c-ede7-4756-8c39-0c9ce454a5de';
 export const BORDER_WIDTH = '3px';
 export const MAZE_SIZE = 12;
 export const MAZE_COLUMN_LAST_CELL = MAZE_SIZE - 1;
@@ -46,19 +48,19 @@ export const getCellBoxShadow = (
   if (bottom && right) {
     boxShadow = `${
       boxShadow ? `${boxShadow}, ` : ''
-    } ${BORDER_WIDTH} ${BORDER_WIDTH}`;
+    }${BORDER_WIDTH} ${BORDER_WIDTH}`;
   }
 
   if (top && left) {
     boxShadow = `${
       boxShadow ? `${boxShadow}, ` : ''
-    } -${BORDER_WIDTH} -${BORDER_WIDTH}`;
+    }-${BORDER_WIDTH} -${BORDER_WIDTH}`;
   }
 
   if (top && right) {
     boxShadow = `${
       boxShadow ? `${boxShadow}, ` : ''
-    } ${BORDER_WIDTH} -${BORDER_WIDTH}`;
+    }${BORDER_WIDTH} -${BORDER_WIDTH}`;
   }
 
   return boxShadow;
@@ -83,19 +85,16 @@ export const isMazeExitCell = (x: number, y: number): boolean =>
 export const fetchUserScore = async (
   score: number,
 ): Promise<UserScoreResponse> => {
-  const response = await fetch(
-    'https://run.mocky.io/v3/7bd95e5c-ede7-4756-8c39-0c9ce454a5de',
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        score,
-        userId: 'hardcodedUserId',
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
+  const response = await fetch(API_ENDPOINT, {
+    method: 'POST',
+    body: JSON.stringify({
+      score,
+      userId: 'hardcodedUserId',
+    }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
     },
-  );
+  });
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
