@@ -37,6 +37,7 @@ export const Maze: FunctionComponent<MazeProps> = ({
   return (
     <Div
       alignItems="center"
+      data-testid="maze-screen-container"
       display="flex"
       justifyContent="center"
       height="100vh"
