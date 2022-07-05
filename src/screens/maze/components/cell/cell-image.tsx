@@ -42,6 +42,7 @@ export const CellImage: FunctionComponent<CellImageProps> = ({
         <source srcSet={pipingWebp} type="image/webp" />
         <img
           alt="green piping"
+          data-testid="green-piping-image"
           height={height * GREEN_PIPING_SCALE}
           src={pipingPng}
           width={width * GREEN_PIPING_SCALE}
@@ -50,12 +51,13 @@ export const CellImage: FunctionComponent<CellImageProps> = ({
     );
   }
 
-  if (isMazeExitCell(x, y)) {
+  if (isMazeExitCell(x, y) && checkAvatarPresence(avatarPosition, x, y)) {
     return (
       <picture>
         <source srcSet={marioEnteringPipingWebp} type="image/webp" />
         <img
           alt="mario entering piping"
+          data-testid="mario-entering-piping-image"
           height={height * MARIO_ENTERING_PIPING_SCALE}
           src={marioEnteringPipingGif}
           width={width * MARIO_ENTERING_PIPING_SCALE}
@@ -70,6 +72,7 @@ export const CellImage: FunctionComponent<CellImageProps> = ({
         <source srcSet={marioAvatarWebp} type="image/webp" />
         <img
           alt="mario avatar"
+          data-testid="mario-avatar-image"
           height={height * MARIO_AVATAR_SCALE}
           src={marioAvatarPng}
           width={width * MARIO_AVATAR_SCALE}
