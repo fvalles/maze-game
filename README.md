@@ -6,7 +6,7 @@ This repository holds a **mario bros maze game** app. 🎮 👾
 
 It was developed with **React JS**, **Typescript** and **Styled Components**! 🚀
 
-You can see the final result either cloning the repository files and running `npm start` from the CLI or visiting it on my Netlify account!
+You can see the final result either cloning the repository files and running `npm i` + `npm start` from the CLI or visiting it on my Netlify account!
 
 To play the game, just click the **Start Game** button and once in the maze screen move across it with the arrow keys.
 
