@@ -8,6 +8,8 @@ It was developed with **React JS**, **Typescript** and **Styled Components**! �
 
 You can see the final result either cloning the repository files and running `npm start` from the CLI or visiting it on my Netlify account!
 
+To play the game, just click the **Start Game** button and once in the maze screen move across it with the arrow keys.
+
 **[👉🏼 View mario bros maze game on Netlify 👈🏼](https://mario-bros-maze-game-fvalles.netlify.app/)**
 
 ## Coding details
