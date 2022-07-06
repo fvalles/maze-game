@@ -24,3 +24,4 @@ To play the game, just click the **Start Game** button and once in the maze scre
 - **Unit tests** were created under a `__tests__` folder across the entire app for: **components, screens, helpers** and **custom hooks**.
 - When the user wins the game **a modal component** tells them the number of moves made and gives the possibility to restart the game and play it again or go to the main screen.
 - To create **the maze**, Eller's Algorithm was used installing [generate-maze](https://www.npmjs.com/package/generate-maze) npm package
+- A fictitious mocked **API endpoint** was created with [mocky](https://designer.mocky.io/)
